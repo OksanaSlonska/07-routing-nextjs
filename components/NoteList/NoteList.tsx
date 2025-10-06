@@ -30,7 +30,12 @@ const NoteList: React.FC<NoteListProps> = ({ notes, onDelete }) => {
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>
-            <Link href={`/notes/${note.id}`}>View details</Link>
+            <Link
+              href={`/notes/${note.id}?tag=${note.tag}`}
+              className={css.viewLink}
+            >
+              View details
+            </Link>
             <button
               className={css.button}
               onClick={() => {
