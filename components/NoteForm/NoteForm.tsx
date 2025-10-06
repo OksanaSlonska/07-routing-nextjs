@@ -31,7 +31,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ onCancel }) => {
     mutationFn: (newNote) => createNote(newNote).then((res) => res.note), //
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
-      onCancel(); // закрываем форму после успеха
+      onCancel();
     },
   });
 
