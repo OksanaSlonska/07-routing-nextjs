@@ -6,7 +6,7 @@ import Link from "next/link";
 
 interface NoteListProps {
   notes: Note[];
-  onDelete?: (id: string) => void; // додали проп для видалення
+  onDelete?: (id: string) => void;
 }
 
 const NoteList: React.FC<NoteListProps> = ({ notes, onDelete }) => {

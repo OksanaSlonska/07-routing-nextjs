@@ -1,15 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  keepPreviousData,
+} from "@tanstack/react-query";
 import { useDebounce } from "use-debounce";
 import {
   fetchNotes,
   createNote,
   deleteNote,
-  Note,
   CreateNoteDTO,
   FetchNotesResponse,
 } from "@/lib/api";
+
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import NoteList from "@/components/NoteList/NoteList";
@@ -41,6 +46,7 @@ export default function NotesClient({ initialTag }: NotesClientProps) {
   const { data, isLoading, error } = useQuery<FetchNotesResponse, Error>({
     queryKey: ["notes", page, debouncedSearch, tagParam],
     queryFn: () => fetchNotes(page, 12, debouncedSearch, tagParam),
+    placeholderData: keepPreviousData,
   });
 
   const notes = data?.notes || [];

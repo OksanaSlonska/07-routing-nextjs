@@ -17,9 +17,9 @@ export default function NoteDetailsClient({ noteId }: NoteDetailsClientProps) {
   } = useQuery<Note, Error>({
     queryKey: ["note", noteId],
     queryFn: () => fetchNoteById(noteId),
-    // Можна додати кешування та інші опції:
-    staleTime: 1000 * 60, // 1 хвилина
-    retry: 1, // повторити один раз при помилці
+
+    staleTime: 1000 * 60,
+    retry: 1,
   });
 
   if (isLoading) return <p>Loading...</p>;
