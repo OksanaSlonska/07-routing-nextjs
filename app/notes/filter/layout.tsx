@@ -49,7 +49,7 @@ export default function FilterLayout({
       <SidebarNotes />
       <div style={{ flex: 1, position: "relative" }}>
         {children}
-        {modal} {/* сюда попадет модалка */}
+        {modal}
       </div>
     </div>
   );

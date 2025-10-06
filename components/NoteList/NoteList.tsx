@@ -12,7 +12,6 @@ interface NoteListProps {
 const NoteList: React.FC<NoteListProps> = ({ notes, onDelete }) => {
   const queryClient = useQueryClient();
 
-  // Якщо onDelete переданий з батька, використовуємо його, інакше локальну мутацію
   const deleteNoteMutation = useMutation({
     mutationFn: (id: string) => deleteNote(id),
     onSuccess: () => {
@@ -30,10 +29,7 @@ const NoteList: React.FC<NoteListProps> = ({ notes, onDelete }) => {
           <p className={css.content}>{note.content}</p>
           <div className={css.footer}>
             <span className={css.tag}>{note.tag}</span>
-            <Link
-              href={`/notes/${note.id}?tag=${note.tag}`}
-              className={css.viewLink}
-            >
+            <Link href={`/notes/${note.id}`} className={css.viewLink}>
               View details
             </Link>
             <button
