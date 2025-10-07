@@ -17,12 +17,12 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
 
     document.addEventListener("keydown", handleEscape);
 
-    const originalOverflow = document.body.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = originalOverflow;
+      document.body.style.overflow = originalBodyOverflow;
     };
   }, [onClose]);
 
@@ -37,7 +37,19 @@ const Modal: React.FC<ModalProps> = ({ onClose, children }) => {
       aria-modal="true"
       onClick={handleBackdropClick}
     >
-      <div className={css.modal}>{children}</div>
+      {/* <div className={css.modal}>{children}</div> */}
+      <div className={css.modal}>
+        {/* 🔹 Добавляем крестик */}
+        <button
+          onClick={onClose}
+          className={css.closeButton}
+          aria-label="Close modal"
+        >
+          ✕
+        </button>
+
+        {children}
+      </div>
     </div>,
     document.body
   );
