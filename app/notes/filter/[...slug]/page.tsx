@@ -1,4 +1,10 @@
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
+import { fetchNotes } from "@/lib/api";
 
 // Тип для тегов
 type Tag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
@@ -14,5 +20,16 @@ export default async function NotesPage({ params }: NotesPageProps) {
   const tag: Tag | "All" =
     tagFromUrl && tagFromUrl !== "All" ? (tagFromUrl as Tag) : "All";
 
-  return <NotesClient initialTag={tag} />;
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["notes", 1, "", tag],
+    queryFn: () => fetchNotes(1, 12, "", tag),
+  });
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <NotesClient initialTag={tag} />
+    </HydrationBoundary>
+  );
 }

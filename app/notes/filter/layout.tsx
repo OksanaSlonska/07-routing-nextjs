@@ -1,23 +1,48 @@
-import SidebarNotes from "./@sidebar/SidebarNotes";
+// import SidebarNotes from "./@sidebar/SidebarNotes";
+
+// export default function FilterLayout({
+//   children,
+//   modal,
+// }: {
+//   children: React.ReactNode;
+//   modal?: React.ReactNode;
+// }) {
+//   return (
+//     <div style={{ display: "flex" }}>
+//       <div
+//         style={{ width: "120px", backgroundColor: "#f0f0f0", padding: "16px" }}
+//       >
+//         <SidebarNotes />
+//       </div>
+//       <div style={{ flex: 1, position: "relative" }}>
+//         {children}
+//         {modal}
+//       </div>
+//     </div>
+//   );
+// }
 
 export default function FilterLayout({
   children,
-  modal,
+  sidebar,
 }: {
   children: React.ReactNode;
-  modal?: React.ReactNode;
+  sidebar: React.ReactNode;
 }) {
   return (
     <div style={{ display: "flex" }}>
-      <div
-        style={{ width: "120px", backgroundColor: "#f0f0f0", padding: "16px" }}
+      <aside
+        style={{
+          width: "180px",
+          backgroundColor: "#f8f8f8",
+          padding: "16px",
+          border: "1px solid red",
+        }}
       >
-        <SidebarNotes />
-      </div>
-      <div style={{ flex: 1, position: "relative" }}>
-        {children}
-        {modal}
-      </div>
+        {sidebar}
+      </aside>
+
+      <main style={{ flex: 1, position: "relative" }}>{children}</main>
     </div>
   );
 }

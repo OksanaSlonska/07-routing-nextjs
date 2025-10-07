@@ -106,7 +106,12 @@ export default function NotesClient({ initialTag }: NotesClientProps) {
           }
         />
       )}
-      <NoteList notes={notes} onDelete={(id) => deleteMutation.mutate(id)} />
+
+      {notes.length > 0 ? (
+        <NoteList notes={notes} onDelete={(id) => deleteMutation.mutate(id)} />
+      ) : (
+        !isLoading && <p className={css.empty}>No notes found.</p>
+      )}
     </div>
   );
 }
